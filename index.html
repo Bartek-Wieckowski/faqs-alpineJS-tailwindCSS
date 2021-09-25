@@ -7,6 +7,7 @@
   <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./public/style.css">
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
@@ -20,28 +21,85 @@
     }
 
     .attribution a {
-      color: hsl(228, 45%, 44%);
+      color: hsl(225, 14%, 95%);
     }
   </style>
 </head>
 
-<body>
-  How many team members can I invite?
-  You can invite up to 2 additional users on the Free plan. There is no limit on
-  team members for the Premium plan.
+<body class="bg-gradient-to-b from-soft-violet to-soft-blue min-h-screen w-full font-Kumbh-Sans">
+  <section class="flex justify-center items-center min-h-screen">
+    <!-- container -->
+    <div
+      class="container bg-white rounded-3xl filter drop-shadow-xl mt-48 mb-36 min-h-ownHeightMobile max-w-xs grid grid-cols-1 md:min-h-ownHeightDesktop md:max-w-2.5xl md:grid-cols-2 lg:max-w-4xl xl:max-w-4xl"
+      x-data="{ faqs: [
+        { question: 'How many team members can I invite?', answer: 'You can invite up to 2 additional users on the Free plan. There is no limit on team members for the Premium plan',isOpen: false },
+        { question: 'What is the maximum file upload size?', answer: 'No more than 2GB. All files in your account must fit your allotted storage space.',isOpen: false },
+        { question: 'How do I reset my password?', answer: 'Click Forgot password from the login page or Change password from your profile page. A reset link will be emailed to you.',isOpen: false },
+        { question: 'Can I cancel my subscription?', answer: 'Yes! Send us a message and we’ll process your request no questions asked.',isOpen: false },
+        { question: 'Do you provide additional support?', answer: 'Chat and email support is available 24/7. Phone lines are open during normal business hours.',isOpen: false },
+                    ]}">
+      <!-- img mobile -->
+      <div class="md:hidden">
+        <div class="relative">
+          <img class="absolute top-12 left-1/2 transform -translate-x-1/2 -translate-y-1/2" src="
+            ./images/bg-pattern-mobile.svg" alt="">
+          <img class="absolute -top-4 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+            src=" ./images/illustration-woman-online-mobile.svg" alt="">
+        </div>
+      </div>
+      <!-- img desktop -->
+      <div class="hidden md:block overflow-hidden">
+        <div class="relative">
+          <img class="w-10/12 absolute top-60 left-40 transform -translate-x-1/2 -translate-y-1/2"
+            src="./images/bg-pattern-desktop.svg" alt="">
+          <img class="w-10/12 absolute top-56 left-32 transform -translate-x-1/2 -translate-y-1/2"
+            src="./images/illustration-woman-online-desktop.svg" alt="">
+        </div>
+      </div>
+      <img class="hidden md:block w-48 absolute top-64 -left-2 transform -translate-x-1/2 -translate-y-1/2"
+        src="./images/illustration-box-desktop.svg" alt="">
 
-  What is the maximum file upload size?
-  No more than 2GB. All files in your account must fit your allotted storage space.
+      <!-- question and answer -->
+      <div class="pb-8 md:px-6 md:py-16">
+        <h1 class="font-bold text-3xl text-center pt-36 ml-0 md:text-2xl md:ml-4 md:pt-0 lg:text-left lg:text-3xl">
+          FAQ
+        </h1>
+        <template x-for="faq in faqs" :key='faq.question'>
+          <div class="px-4 mb-5 md:mb-0">
+            <button
+              class="flex justify-between items-center w-full py-4 mt-4 border-b border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-soft-violet rounded"
+              :class="{'border-none' : faq.isOpen === true, 'border-b border-gray-200': faq.isOpen === false}"
+              @click="faq.isOpen = !faq.isOpen">
+              <div class="text-gray-700 hover:text-yellow-500 text-sm"
+                :class="{'font-bold ' : faq.isOpen === true, 'font-normal': faq.isOpen === false}"
+                x-text="faq.question">
+              </div>
+              <svg x-show="!faq.isOpen" class="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                  clip-rule="evenodd"></path>
+              </svg>
+              <svg x-show="faq.isOpen" class="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                  d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
+                  clip-rule="evenodd"></path>
+              </svg>
+              </svg>
 
-  How do I reset my password?
-  Click “Forgot password” from the login page or “Change password” from your profile page.
-  A reset link will be emailed to you.
+            </button>
+            <div class="mt-2 text-sm text-gray-400 py-4 border-b border-gray-200 " x-text="faq.answer"
+              x-show="faq.isOpen" x-transition:enter=""></div>
 
-  Can I cancel my subscription?
-  Yes! Send us a message and we’ll process your request no questions asked.
+          </div>
+        </template>
 
-  Do you provide additional support?
-  Chat and email support is available 24/7. Phone lines are open during normal business hours.
+
+      </div>
+    </div>
+  </section>
+
 
   <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
